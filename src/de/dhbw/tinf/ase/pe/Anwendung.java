@@ -26,14 +26,14 @@ public class Anwendung {
 			try {
 				aktion = Integer.parseInt(input);
 			} catch (NumberFormatException e) {
-				System.out.println("Unzulässige Eingabe!");
+				System.out.println("Unzulaessige Eingabe!");
 				continue;
 			}
 
 			if (aktion == 1) {
 				System.out.println(geldautomat.info());
 			} else if (aktion == 2) {
-				geldautomatBestücken(geldautomat);
+				geldautomatBestuecken(geldautomat);
 			} else if (aktion == 3) {
 				karteEinschieben(geldautomat);
 			} else if (aktion == 4) {
@@ -44,7 +44,7 @@ public class Anwendung {
 				geldautomat.ausgeben();
 				System.out.println("Deine Karte wurde wieder ausgeworfen");
 			} else if (aktion == 7) {
-				System.out.println("Der Automat enthält " + geldautomat.füllstand() + " Taler");
+				System.out.println("Der Automat enthaelt " + geldautomat.fuellstand() + " Taler");
 			} else if (aktion == 8) {
 				break;
 			}
@@ -58,7 +58,7 @@ public class Anwendung {
 	}
 
 	private static void geldAuszahlen(Geldautomat geldautomat) {
-		System.out.print("Bitte gib den gewünschten Betrag ein: ");
+		System.out.print("Bitte gib den gewuenschten Betrag ein: ");
 		try {
 			String input = cin.readLine();
 			int abheben = Integer.parseInt(input);
@@ -69,7 +69,7 @@ public class Anwendung {
 			}
 			
 			if (summe == abheben) {
-				System.out.println(input + " Taler ausgegeben - viel Spaß damit");
+				System.out.println(input + " Taler ausgegeben - viel Spass damit");
 			}
 		} catch (IOException | NumberFormatException e) {
 			geldAuszahlen(geldautomat);
@@ -90,7 +90,7 @@ public class Anwendung {
 
 	private static void karteEinschieben(Geldautomat geldautomat) {
 		String pin = erzeugePin();
-		System.out.println("Die Pin für deine Karte ist " + pin);
+		System.out.println("Die Pin fuer deine Karte ist " + pin);
 		Karte karte = new Karte(pin);
 		geldautomat.einschieben(karte);
 		System.out.println("Die Karte ist jetzt im Automat");
@@ -109,26 +109,26 @@ public class Anwendung {
 		return sb.toString();
 	}
 
-	private static void geldautomatBestücken(Geldautomat geldautomat) {
+	private static void geldautomatBestuecken(Geldautomat geldautomat) {
 		System.out.print("Bitte gib die Summe ein: ");
 		try {
 			String input = cin.readLine();
 			int summe = Integer.parseInt(input);
-			geldautomat.bestücken(summe);
+			geldautomat.bestuecken(summe);
 		} catch (NumberFormatException | IOException e) {
-			geldautomatBestücken(geldautomat);
+			geldautomatBestuecken(geldautomat);
 		}
 	}
 
 	private static void wasWillstDuTun() {
 		System.out.println("Was willst du tun?");
 		System.out.println("[1] - Info ausgeben");
-		System.out.println("[2] - Geldautomat bestücken");
+		System.out.println("[2] - Geldautomat bestuecken");
 		System.out.println("[3] - Karte einschieben");
 		System.out.println("[4] - PIN eingeben");
 		System.out.println("[5] - Geld auszahlen");
 		System.out.println("[6] - Karte entnehmen");
-		System.out.println("[7] - Füllstand anzeigen");
+		System.out.println("[7] - Fuellstand anzeigen");
 		System.out.println("[8] - Programm beenden");
 
 	}
