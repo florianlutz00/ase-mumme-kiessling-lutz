@@ -7,9 +7,9 @@ public class Geldautomat {
 	private boolean pinKorrekt = false;
 	private int pinFalsch = 0;
 
-	public void bestücken(int bargeld) {
+	public void bestuecken(int bargeld) {
 		if (this.karte != null) {
-			throw new IllegalStateException("Automat darf nicht während einer Transaktion bestückt werden!");
+			throw new IllegalStateException("Automat darf nicht waehrend einer Transaktion bestueckt werden!");
 		}
 		this.bargeld += bargeld;
 	}
@@ -18,7 +18,12 @@ public class Geldautomat {
 		if (this.karte != null) {
 			throw new IllegalStateException("Es befindet sich bereits eine Karte im Automat!");
 		}
-		this.karte = karte;
+		if(karte != null) {
+			this.karte = karte;
+		}
+		else {
+			throw new IllegalStateException("Die eingeschobenen Karte darf nicht null sein!");
+		}
 	}
 
 	public void ausgeben() {
@@ -79,7 +84,7 @@ public class Geldautomat {
 				if (pinKorrekt) {
 					return "Maximalbetrag kann abgehoben werden";
 				} else {
-					return "Falsche PIN oder PIN nicht eingegeben - Abhebung nicht möglich!";
+					return "Falsche PIN oder PIN nicht eingegeben - Abhebung nicht moeglich!";
 				}
 			} else {
 				return "Alles OK - bitte Karte eingeben";
@@ -87,19 +92,19 @@ public class Geldautomat {
 		} else if (bargeld > 0) {
 			if (karte != null) {
 				if (pinKorrekt) {
-					return "Abhebung bis zu " + bargeld + " Geld ist möglich";
+					return "Abhebung bis zu " + bargeld + " Geld ist moeglich";
 				} else {
-					return "Falsche PIN oder PIN nicht eingegeben - Abhebung nicht möglich!";
+					return "Falsche PIN oder PIN nicht eingegeben - Abhebung nicht moeglich!";
 				}
 			} else {
-				return "Abhebung bis zu " + bargeld + " Geld ist möglich - bitte Karte eingeben";
+				return "Abhebung bis zu " + bargeld + " Geld ist moeglich - bitte Karte eingeben";
 			}
 		}
 		
-		return "Der Automat enthält " + füllstand() + " Taler.";
+		return "Der Automat enthaelt " + fuellstand() + " Taler.";
 	}
 	
-	public int füllstand() {
+	public int fuellstand() {
 		return bargeld;
 	}
 	
