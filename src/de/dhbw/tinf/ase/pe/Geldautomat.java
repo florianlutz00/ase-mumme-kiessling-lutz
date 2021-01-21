@@ -18,6 +18,9 @@ public class Geldautomat {
 		if (this.karte != null) {
 			throw new IllegalStateException("Es befindet sich bereits eine Karte im Automat!");
 		}
+		if(bargeld == 0) {
+			throw new IllegalStateException("Karte darf nicht in einen leeren Automaten eingeschoben werden!");
+		}
 		if(karte != null) {
 			this.karte = karte;
 		}

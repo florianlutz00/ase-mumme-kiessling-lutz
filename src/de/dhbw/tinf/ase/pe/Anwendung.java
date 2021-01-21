@@ -56,6 +56,50 @@ public class Anwendung {
 		cin.close();
 
 	}
+	
+	private static void geldautomatBestuecken(Geldautomat geldautomat) {
+		System.out.print("Bitte gib die Summe ein: ");
+		try {
+			String input = cin.readLine();
+			int summe = Integer.parseInt(input);
+			geldautomat.bestuecken(summe);
+		} catch (NumberFormatException | IOException e) {
+			geldautomatBestuecken(geldautomat);
+		}
+	}
+	
+	private static void karteEinschieben(Geldautomat geldautomat) {
+		String pin = erzeugePin();
+		System.out.println("Die Pin fuer deine Karte ist " + pin);
+		Karte karte = new Karte(pin);
+		geldautomat.einschieben(karte);
+		System.out.println("Die Karte ist jetzt im Automat");
+	}
+	
+	private static String erzeugePin() {
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < 4; i++) {
+			double zufall = Math.random();
+			double ziffer = zufall;
+			do {
+				ziffer *= 10;
+			} while (ziffer < 1.0);
+			sb.append((int) ziffer);
+		}
+		return sb.toString();
+	}
+	
+	private static void pinEingeben(Geldautomat geldautomat) {
+		System.out.print("Bitte gib jetzt deine PIN ein: ");
+		try {
+			String pin = cin.readLine();
+			geldautomat.eingeben(pin);
+		} catch (IOException e) {
+			pinEingeben(geldautomat);
+		} catch (IllegalStateException e) {
+			System.out.println(e.getMessage());
+		}
+	}
 
 	private static void geldAuszahlen(Geldautomat geldautomat) {
 		System.out.print("Bitte gib den gewuenschten Betrag ein: ");
@@ -76,49 +120,7 @@ public class Anwendung {
 		}
 	}
 
-	private static void pinEingeben(Geldautomat geldautomat) {
-		System.out.print("Bitte gib jetzt deine PIN ein: ");
-		try {
-			String pin = cin.readLine();
-			geldautomat.eingeben(pin);
-		} catch (IOException e) {
-			pinEingeben(geldautomat);
-		} catch (IllegalStateException e) {
-			System.out.println(e.getMessage());
-		}
-	}
 
-	private static void karteEinschieben(Geldautomat geldautomat) {
-		String pin = erzeugePin();
-		System.out.println("Die Pin fuer deine Karte ist " + pin);
-		Karte karte = new Karte(pin);
-		geldautomat.einschieben(karte);
-		System.out.println("Die Karte ist jetzt im Automat");
-	}
-
-	private static String erzeugePin() {
-		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < 4; i++) {
-			double zufall = Math.random();
-			double ziffer = zufall;
-			do {
-				ziffer *= 10;
-			} while (ziffer < 1.0);
-			sb.append((int) ziffer);
-		}
-		return sb.toString();
-	}
-
-	private static void geldautomatBestuecken(Geldautomat geldautomat) {
-		System.out.print("Bitte gib die Summe ein: ");
-		try {
-			String input = cin.readLine();
-			int summe = Integer.parseInt(input);
-			geldautomat.bestuecken(summe);
-		} catch (NumberFormatException | IOException e) {
-			geldautomatBestuecken(geldautomat);
-		}
-	}
 
 	private static void wasWillstDuTun() {
 		System.out.println("Was willst du tun?");
