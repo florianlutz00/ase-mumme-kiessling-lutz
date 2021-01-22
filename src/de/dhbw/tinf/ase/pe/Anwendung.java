@@ -81,9 +81,10 @@ public class Anwendung {
 		for (int i = 0; i < 4; i++) {
 			double zufall = Math.random();
 			double ziffer = zufall;
-			do {
+			if(ziffer < 0.95) {
 				ziffer *= 10;
-			} while (ziffer < 1.0);
+			}
+			ziffer = Math.round(ziffer);
 			sb.append((int) ziffer);
 		}
 		return sb.toString();
@@ -93,7 +94,24 @@ public class Anwendung {
 		System.out.print("Bitte gib jetzt deine PIN ein: ");
 		try {
 			String pin = cin.readLine();
-			geldautomat.eingeben(pin);
+			int result = geldautomat.eingeben(pin);
+			
+			if(result == 0) 
+			{
+				System.out.println("PIN korret!");
+			}
+			if(result == 1) 
+			{
+				System.out.println("Die eingegebene PIN ist falsch, Sie haben 2 Versuche uebrig.");
+			}
+			if(result == 2) 
+			{
+				System.out.println("Die eingegebene PIN ist falsch, Sie haben 1 Versuch uebrig.");
+			}
+			if(result == 3) 
+			{
+				System.out.println("Sie haben Ihre PIN mehrmals falsch eingegeben. Ihre Karte wird nun ausgeworfen.");
+			}
 		} catch (IOException e) {
 			pinEingeben(geldautomat);
 		} catch (IllegalStateException e) {
@@ -108,12 +126,19 @@ public class Anwendung {
 			int abheben = Integer.parseInt(input);
 			int summe = geldautomat.auszahlen(abheben);
 			
-			if (summe == -1) {
+			if (summe == -1) 
+			{
 				System.out.println("Keine Karte oder falsche PIN - bitte noch einmal versuchen!");
 			}
 			
-			if (summe == abheben) {
+			if (summe == abheben) 
+			{
 				System.out.println(input + " Taler ausgegeben - viel Spass damit");
+			}
+			
+			else 
+			{
+				System.out.println(summe + " Taler ausgegeben - viel Spass damit. Leider ist der Automat leer. Ihre Karte wird nun ausgeworfen.");
 			}
 		} catch (IOException | NumberFormatException e) {
 			geldAuszahlen(geldautomat);
@@ -132,7 +157,6 @@ public class Anwendung {
 		System.out.println("[6] - Karte entnehmen");
 		System.out.println("[7] - Fuellstand anzeigen");
 		System.out.println("[8] - Programm beenden");
-
 	}
 
 }

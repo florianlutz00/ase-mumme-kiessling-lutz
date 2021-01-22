@@ -1,6 +1,7 @@
 package de.dhbw.tinf.ase.pe;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import org.junit.Ignore;
@@ -14,14 +15,14 @@ public class GeldautomatTest {
 	@Test
 	public void testStandardZustand() {
 		Geldautomat geldautomat = new Geldautomat();
-		fail();
+		assertTrue("Geldautomat muss im Zustand Kein Geld sein", geldautomat.aktuellerZustand instanceof GeldautomatKeinGeld);
 	}
 
 	@Test
 	public void testWechsleInZustandBereitDurchBestücken() {
 		Geldautomat geldautomat = new Geldautomat();
 		geldautomat.bestuecken(200);
-		fail();
+		assertTrue("Geldautomat muss im Zustand Bereit sein", geldautomat.aktuellerZustand instanceof GeldautomatBereit);
 	}
 	
 	@Test
@@ -31,7 +32,7 @@ public class GeldautomatTest {
 		geldautomat.einschieben(new Karte("0000"));
 		geldautomat.eingeben("0000");
 		geldautomat.ausgeben();
-		fail();
+		assertTrue("Geldautomat muss im Zustand Bereit sein", geldautomat.aktuellerZustand instanceof GeldautomatBereit);
 	}
 	
 	@Test
@@ -39,7 +40,7 @@ public class GeldautomatTest {
 		Geldautomat geldautomat = new Geldautomat();
 		geldautomat.bestuecken(200);
 		geldautomat.einschieben(new Karte("0000"));
-		fail();
+		assertTrue("Geldautomat muss im Zustand KarteDrin sein", geldautomat.aktuellerZustand instanceof GeldautomatKarteDrin);
 	}
 	
 	@Test
@@ -48,7 +49,7 @@ public class GeldautomatTest {
 		geldautomat.bestuecken(200);
 		geldautomat.einschieben(new Karte("0000"));
 		geldautomat.eingeben("1111");
-		fail();
+		assertTrue("Geldautomat muss im Zustand KarteDrin sein", geldautomat.aktuellerZustand instanceof GeldautomatKarteDrin);
 	}
 	
 	@Test
@@ -57,7 +58,7 @@ public class GeldautomatTest {
 		geldautomat.bestuecken(200);
 		geldautomat.einschieben(new Karte("0000"));
 		geldautomat.eingeben("0000");
-		fail();
+		assertTrue("Geldautomat muss im Zustand PinKorrekt sein", geldautomat.aktuellerZustand instanceof GeldautomatPinKorrekt);
 	}
 	
 	@Test
@@ -67,17 +68,27 @@ public class GeldautomatTest {
 		geldautomat.einschieben(new Karte("0000"));
 		geldautomat.eingeben("0000");
 		geldautomat.auszahlen(20);
-		fail();
+		assertTrue("Geldautomat muss im Zustand PinKorrekt sein", geldautomat.aktuellerZustand instanceof GeldautomatPinKorrekt);
 	}
 	
 	@Test
-	public void testWechsleInZustandKeinGeld() {
+	public void testWechsleInZustandKeinGeldPassend() {
 		Geldautomat geldautomat = new Geldautomat();
 		geldautomat.bestuecken(200);
 		geldautomat.einschieben(new Karte("0000"));
 		geldautomat.eingeben("0000");
 		geldautomat.auszahlen(200);
-		fail();
+		assertTrue("Geldautomat muss im Zustand Kein Geld sein", geldautomat.aktuellerZustand instanceof GeldautomatKeinGeld);
+	}
+	
+	@Test
+	public void testWechsleInZustandKeinGeldUnpassend() {
+		Geldautomat geldautomat = new Geldautomat();
+		geldautomat.bestuecken(200);
+		geldautomat.einschieben(new Karte("0000"));
+		geldautomat.eingeben("0000");
+		geldautomat.auszahlen(250);
+		assertTrue("Geldautomat muss im Zustand Kein Geld sein", geldautomat.aktuellerZustand instanceof GeldautomatKeinGeld);
 	}
 	
 	@Test
@@ -163,6 +174,17 @@ public class GeldautomatTest {
 		int summe = geldautomat.auszahlen(300);
 		assertEquals("Bei zu wenig Geld muss der Rest(100) zurueckgegeben werden!", 100, summe);
 		assertEquals("Bargeld muss jetzt 0 sein!", 0, geldautomat.fuellstand());
+	}
+	
+	@Test
+	public void testDreiFalschePins() {
+		Geldautomat geldautomat = new Geldautomat();
+		geldautomat.bestuecken(100);
+		geldautomat.einschieben(new Karte("1111"));
+		geldautomat.eingeben("1110");
+		geldautomat.eingeben("1110");
+		geldautomat.eingeben("1110");
+		assertTrue("Geldautomat muss im Zustand Bereit sein", geldautomat.aktuellerZustand instanceof GeldautomatBereit);
 	}
 	
 }

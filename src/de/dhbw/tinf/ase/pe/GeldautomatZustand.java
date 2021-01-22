@@ -1,0 +1,12 @@
+package de.dhbw.tinf.ase.pe;
+
+public interface GeldautomatZustand {
+	
+	public void ausgeben();
+	public int auszahlen(int betrag);
+	public void bestuecken(int betrag);
+	public int eingeben(String pin);
+	public void einschieben(Karte karte);
+	public int fuellstand();
+	public String info();
+}
