@@ -1,4 +1,6 @@
-package de.dhbw.tinf.ase.pe;
+package de.dhbw.tinf.ase.pe.zustaende;
+
+import de.dhbw.tinf.ase.pe.Karte;
 
 public interface GeldautomatZustand {
 	

@@ -1,4 +1,7 @@
-package de.dhbw.tinf.ase.pe;
+package de.dhbw.tinf.ase.pe.zustaende;
+
+import de.dhbw.tinf.ase.pe.Geldautomat;
+import de.dhbw.tinf.ase.pe.Karte;
 
 public class GeldautomatKarteDrin implements GeldautomatZustand{
 	

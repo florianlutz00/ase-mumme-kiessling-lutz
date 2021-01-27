@@ -1,5 +1,8 @@
 package de.dhbw.tinf.ase.pe;
 
+import de.dhbw.tinf.ase.pe.zustaende.GeldautomatKeinGeld;
+import de.dhbw.tinf.ase.pe.zustaende.GeldautomatZustand;
+
 public class Geldautomat {
 	
 	public int bargeld = 0;

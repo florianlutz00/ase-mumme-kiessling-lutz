@@ -4,11 +4,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import org.junit.Ignore;
+import de.dhbw.tinf.ase.pe.zustaende.GeldautomatBereit;
+import de.dhbw.tinf.ase.pe.zustaende.GeldautomatKarteDrin;
+import de.dhbw.tinf.ase.pe.zustaende.GeldautomatKeinGeld;
+import de.dhbw.tinf.ase.pe.zustaende.GeldautomatPinKorrekt;
 import org.junit.Test;
-
-import de.dhbw.tinf.ase.pe.Geldautomat;
-import de.dhbw.tinf.ase.pe.Karte;
 
 public class GeldautomatTest {
 	
@@ -19,7 +19,7 @@ public class GeldautomatTest {
 	}
 
 	@Test
-	public void testWechsleInZustandBereitDurchBestücken() {
+	public void testWechsleInZustandBereitDurchBestuecken() {
 		Geldautomat geldautomat = new Geldautomat();
 		geldautomat.bestuecken(200);
 		assertTrue("Geldautomat muss im Zustand Bereit sein", geldautomat.aktuellerZustand instanceof GeldautomatBereit);
