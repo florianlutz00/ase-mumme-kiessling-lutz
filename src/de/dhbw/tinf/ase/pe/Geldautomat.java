@@ -46,8 +46,9 @@ public class Geldautomat {
 		return aktuellerZustand.fuellstand();
 	}
 
-	public void wasWillstDuTun(){
-		aktuellerZustand.wasWillstDuTun();
+
+	public boolean[] verfuegbareOptionen(){
+		return aktuellerZustand.verfuegbareOptionen();
 	}
 	
 }

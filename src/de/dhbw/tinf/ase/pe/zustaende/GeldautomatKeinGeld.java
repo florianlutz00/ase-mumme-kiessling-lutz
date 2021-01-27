@@ -59,13 +59,18 @@ public class GeldautomatKeinGeld implements GeldautomatZustand {
 	}
 
 
+
 	@Override
-	public  void wasWillstDuTun() {
-		System.out.println("Was willst du tun?");
-		System.out.println("[1] - Info ausgeben");
-		System.out.println("[2] - Geldautomat bestuecken");
-		System.out.println("[3] - Karte einschieben");
-		System.out.println("[7] - Fuellstand anzeigen");
-		System.out.println("[8] - Programm beenden");
+	public boolean[] verfuegbareOptionen(){
+		return new boolean[]{
+				true,
+				true,
+				false,
+				false,
+				false,
+				false,
+				true,
+				true
+		};
 	}
 }

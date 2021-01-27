@@ -18,5 +18,6 @@ public interface GeldautomatZustand {
 
     public String info();
 
-    public void wasWillstDuTun();
+
+    public boolean[] verfuegbareOptionen();
 }
