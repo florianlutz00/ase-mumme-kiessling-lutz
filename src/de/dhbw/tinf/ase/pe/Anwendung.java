@@ -16,39 +16,42 @@ public class Anwendung {
 		System.out.println(geldautomat.info());
 
 		while (true) {
-
-			wasWillstDuTun();
-
-			String input = cin.readLine();
-
-			int aktion = 0;
-
 			try {
-				aktion = Integer.parseInt(input);
-			} catch (NumberFormatException e) {
-				System.out.println("Unzulaessige Eingabe!");
-				continue;
-			}
 
-			if (aktion == 1) {
-				System.out.println(geldautomat.info());
-			} else if (aktion == 2) {
-				geldautomatBestuecken(geldautomat);
-			} else if (aktion == 3) {
-				karteEinschieben(geldautomat);
-			} else if (aktion == 4) {
-				pinEingeben(geldautomat);
-			} else if (aktion == 5) {
-				geldAuszahlen(geldautomat);
-			} else if (aktion == 6) {
-				geldautomat.ausgeben();
-				System.out.println("Deine Karte wurde wieder ausgeworfen");
-			} else if (aktion == 7) {
-				System.out.println("Der Automat enthaelt " + geldautomat.fuellstand() + " Taler");
-			} else if (aktion == 8) {
-				break;
-			}
+				wasWillstDuTun();
 
+				String input = cin.readLine();
+
+				int aktion = 0;
+
+				try {
+					aktion = Integer.parseInt(input);
+				} catch (NumberFormatException e) {
+					System.out.println("Unzulaessige Eingabe!");
+					continue;
+				}
+
+				if (aktion == 1) {
+					System.out.println(geldautomat.info());
+				} else if (aktion == 2) {
+					geldautomatBestuecken(geldautomat);
+				} else if (aktion == 3) {
+					karteEinschieben(geldautomat);
+				} else if (aktion == 4) {
+					pinEingeben(geldautomat);
+				} else if (aktion == 5) {
+					geldAuszahlen(geldautomat);
+				} else if (aktion == 6) {
+					geldautomat.ausgeben();
+					System.out.println("Deine Karte wurde wieder ausgeworfen");
+				} else if (aktion == 7) {
+					System.out.println("Der Automat enthaelt " + geldautomat.fuellstand() + " Taler");
+				} else if (aktion == 8) {
+					break;
+				}
+			}catch (IllegalStateException e){
+				System.out.println(e.getMessage());
+			}
 		}
 
 		System.out.println("Danke dass du den DHBW Geldautomat benutzt hast :-)");
