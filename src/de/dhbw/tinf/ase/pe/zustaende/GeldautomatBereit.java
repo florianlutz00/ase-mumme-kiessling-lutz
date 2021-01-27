@@ -3,54 +3,61 @@ package de.dhbw.tinf.ase.pe.zustaende;
 import de.dhbw.tinf.ase.pe.Geldautomat;
 import de.dhbw.tinf.ase.pe.Karte;
 
-public class GeldautomatBereit implements GeldautomatZustand{
+public class GeldautomatBereit implements GeldautomatZustand {
 
-	public  GeldautomatBereit(Geldautomat geldautomat) {
-		this.geldautomat = geldautomat;
-	}
-	
-	private Geldautomat geldautomat;
-	
-	@Override
-	public void ausgeben() {
-		throw new IllegalStateException("Es wurde noch keine Karte eingeschoben!");	
-	}
+    public GeldautomatBereit(Geldautomat geldautomat) {
+        this.geldautomat = geldautomat;
+    }
 
-	@Override
-	public int auszahlen(int betrag) {
-		return -1;
-	}
+    private Geldautomat geldautomat;
 
-	@Override
-	public void bestuecken(int betrag) {
-		geldautomat.bargeld += betrag;
-	}
+    @Override
+    public void ausgeben() {
+        throw new IllegalStateException("Es wurde noch keine Karte eingeschoben!");
+    }
 
-	@Override
-	public int eingeben(String pin) {
-		throw new IllegalStateException("Es wurde noch keine Karte eingeschoben!");	
-	}
+    @Override
+    public int auszahlen(int betrag) {
+        return -1;
+    }
 
-	@Override
-	public void einschieben(Karte karte) {
-		if(karte != null)
-		{
-			geldautomat.karte = karte;
-			geldautomat.setAktuellerZustand(new GeldautomatKarteDrin(geldautomat));
-		}
-		else 
-		{
-			throw new IllegalStateException("Die eingeschobenen Karte darf nicht null sein!");
-		}
-	}
+    @Override
+    public void bestuecken(int betrag) {
+        geldautomat.bargeld += betrag;
+    }
 
-	@Override
-	public int fuellstand() {
-		return geldautomat.bargeld;
-	}
+    @Override
+    public int eingeben(String pin) {
+        throw new IllegalStateException("Es wurde noch keine Karte eingeschoben!");
+    }
 
-	@Override
-	public String info() {
-		return "Abhebung bis zu " + fuellstand() + " Geld ist moeglich - bitte Karte eingeben";
-	}
+    @Override
+    public void einschieben(Karte karte) {
+        if (karte != null) {
+            geldautomat.karte = karte;
+            geldautomat.setAktuellerZustand(new GeldautomatKarteDrin(geldautomat));
+        } else {
+            throw new IllegalStateException("Die eingeschobenen Karte darf nicht null sein!");
+        }
+    }
+
+    @Override
+    public int fuellstand() {
+        return geldautomat.bargeld;
+    }
+
+    @Override
+    public String info() {
+        return "Abhebung bis zu " + fuellstand() + " Geld ist moeglich - bitte Karte eingeben";
+    }
+
+    @Override
+    public void wasWillstDuTun() {
+        System.out.println("Was willst du tun?");
+        System.out.println("[1] - Info ausgeben");
+        System.out.println("[2] - Geldautomat bestuecken");
+        System.out.println("[3] - Karte einschieben");
+        System.out.println("[7] - Fuellstand anzeigen");
+        System.out.println("[8] - Programm beenden");
+    }
 }

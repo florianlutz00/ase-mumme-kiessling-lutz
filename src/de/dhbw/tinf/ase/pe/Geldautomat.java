@@ -45,5 +45,9 @@ public class Geldautomat {
 	public int fuellstand() {
 		return aktuellerZustand.fuellstand();
 	}
+
+	public void wasWillstDuTun(){
+		aktuellerZustand.wasWillstDuTun();
+	}
 	
 }
