@@ -59,9 +59,7 @@ public class Anwendung {
         }
 
         System.out.println("Danke dass du den DHBW Geldautomat benutzt hast :-)");
-
         cin.close();
-
     }
 
     private static void geldautomatBestuecken(Geldautomat geldautomat) {
@@ -147,6 +145,9 @@ public class Anwendung {
 
     private static int aktionZuAktionsnummer(int aktion, boolean[] verfuegbareOptionen) {
         int anzahlOptionen = 1;
+        if(verfuegbareOptionen.length != 8){
+            throw new IllegalArgumentException("Es muss ein Array mit 8 boolean Werten übergeben werden");
+        }
         for (int i = 0; i < verfuegbareOptionen.length; i++) {
             if (verfuegbareOptionen[i]) {
                 if (aktion == anzahlOptionen) {
