@@ -3,9 +3,6 @@ package de.dhbw.tinf.ase.pe;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.IntStream;
 
 public class Anwendung {
 
@@ -34,7 +31,7 @@ public class Anwendung {
                     continue;
                 }
 
-                aktion = aktionZuAktionsnummer(aktion,geldautomat.verfuegbareOptionen());
+                aktion = aktionZuAktionsnummer(aktion, geldautomat.verfuegbareOptionen());
 
                 if (aktion == 1) {
                     System.out.println(geldautomat.info());
@@ -53,7 +50,7 @@ public class Anwendung {
                     System.out.println("Der Automat enthaelt " + geldautomat.fuellstand() + " Taler");
                 } else if (aktion == 8) {
                     break;
-                }else{
+                } else {
                     System.out.println("Ungueltige Aktion!");
                 }
             } catch (IllegalStateException e) {
@@ -104,21 +101,24 @@ public class Anwendung {
         System.out.print("Bitte gib jetzt deine PIN ein: ");
         try {
             String pin = cin.readLine();
-            int result = geldautomat.eingeben(pin);
-
-            if (result == 0) {
-                System.out.println("PIN korret!");
-            }
-            if (result == 1) {
-                System.out.println("Die eingegebene PIN ist falsch, Sie haben 2 Versuche uebrig.");
-            }
-            if (result == 2) {
-                System.out.println("Die eingegebene PIN ist falsch, Sie haben 1 Versuch uebrig.");
-            }
-            if (result == 3) {
-                System.out.println("Sie haben Ihre PIN mehrmals falsch eingegeben. Ihre Karte wird nun ausgeworfen.");
+            switch (geldautomat.eingeben(pin)) {
+                case 0:
+                    System.out.println("PIN korrekt!");
+                    break;
+                case 1:
+                    System.out.println("Die eingegebene PIN ist falsch, Sie haben 2 Versuche uebrig.");
+                    break;
+                case 2:
+                    System.out.println("Die eingegebene PIN ist falsch, Sie haben 1 Versuch uebrig.");
+                    break;
+                case 3:
+                    System.out.println("Sie haben Ihre PIN mehrmals falsch eingegeben. Ihre Karte wird nun ausgeworfen.");
+                    break;
+                default:
+                    System.out.println("Etwas ist schief gelaufen.");
             }
         } catch (IOException e) {
+            System.out.println("Etwas ist schief gelaufen - bitte noch einmal versuchen! (Fehler: " + e.getMessage() + ")");
             pinEingeben(geldautomat);
         } catch (IllegalStateException e) {
             System.out.println(e.getMessage());
@@ -134,10 +134,8 @@ public class Anwendung {
 
             if (summe == -1) {
                 System.out.println("Keine Karte oder falsche PIN - bitte noch einmal versuchen!");
-            }
-
-            if (summe == abheben) {
-                System.out.println(input + " Taler ausgegeben - viel Spass damit");
+            }else if (summe == abheben) {
+                System.out.println(input + " Taler ausgegeben - viel Spass damit.");
             } else {
                 System.out.println(summe + " Taler ausgegeben - viel Spass damit. Leider ist der Automat leer. Ihre Karte wird nun ausgeworfen.");
             }
@@ -159,6 +157,7 @@ public class Anwendung {
         }
         return -1;
     }
+
     private static void wasWillstDuTun(boolean[] verfuegbareOptionen) {
         System.out.println("Was willst du tun?");
         int anzahlOptionen = 1;
@@ -192,7 +191,6 @@ public class Anwendung {
         }
         if (verfuegbareOptionen[7]) {
             System.out.println("[" + anzahlOptionen + "] - Programm beenden");
-            anzahlOptionen++;
         }
     }
 

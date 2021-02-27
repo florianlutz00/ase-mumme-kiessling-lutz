@@ -1,23 +1,34 @@
 package de.dhbw.tinf.ase.pe.zustaende;
 
+import de.dhbw.tinf.ase.pe.Geldautomat;
 import de.dhbw.tinf.ase.pe.Karte;
 
-public interface GeldautomatZustand {
+public abstract class GeldautomatZustand {
 
-    public void ausgeben();
+    protected boolean[] verfuegbareOptionen;
+    protected Geldautomat geldautomat;
 
-    public int auszahlen(int betrag);
-
-    public void bestuecken(int betrag);
-
-    public int eingeben(String pin);
-
-    public void einschieben(Karte karte);
-
-    public int fuellstand();
-
-    public String info();
+    public GeldautomatZustand(Geldautomat geldautomat, boolean[] verfuegbareOptionen) {
+        this.geldautomat = geldautomat;
+        this.verfuegbareOptionen = verfuegbareOptionen;
+    }
 
 
-    public boolean[] verfuegbareOptionen();
+    public abstract void ausgeben();
+
+    public abstract int auszahlen(int betrag);
+
+    public abstract void bestuecken(int betrag);
+
+    public abstract int eingeben(String pin);
+
+    public abstract void einschieben(Karte karte);
+
+    public abstract int fuellstand();
+
+    public abstract String info();
+
+    public boolean[] getVerfuegbareOptionen() {
+        return verfuegbareOptionen;
+    }
 }

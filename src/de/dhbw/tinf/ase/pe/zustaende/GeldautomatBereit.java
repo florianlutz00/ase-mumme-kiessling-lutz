@@ -3,13 +3,20 @@ package de.dhbw.tinf.ase.pe.zustaende;
 import de.dhbw.tinf.ase.pe.Geldautomat;
 import de.dhbw.tinf.ase.pe.Karte;
 
-public class GeldautomatBereit implements GeldautomatZustand {
+public class GeldautomatBereit extends GeldautomatZustand {
 
     public GeldautomatBereit(Geldautomat geldautomat) {
-        this.geldautomat = geldautomat;
+        super(geldautomat, new boolean[]{
+                true,
+                true,
+                true,
+                false,
+                false,
+                false,
+                true,
+                true
+        });
     }
-
-    private Geldautomat geldautomat;
 
     @Override
     public void ausgeben() {
@@ -52,17 +59,4 @@ public class GeldautomatBereit implements GeldautomatZustand {
     }
 
 
-    @Override
-    public boolean[] verfuegbareOptionen(){
-        return new boolean[]{
-                true,
-                true,
-                true,
-                false,
-                false,
-                false,
-                true,
-                true
-        };
-    }
 }

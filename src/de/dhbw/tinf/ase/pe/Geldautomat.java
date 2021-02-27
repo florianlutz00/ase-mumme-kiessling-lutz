@@ -48,7 +48,7 @@ public class Geldautomat {
 
 
 	public boolean[] verfuegbareOptionen(){
-		return aktuellerZustand.verfuegbareOptionen();
+		return aktuellerZustand.getVerfuegbareOptionen();
 	}
 	
 }
