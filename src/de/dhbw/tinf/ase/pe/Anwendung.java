@@ -160,6 +160,9 @@ public class Anwendung {
 
     private static void wasWillstDuTun(boolean[] verfuegbareOptionen) {
         System.out.println("Was willst du tun?");
+        if(verfuegbareOptionen.length != 8){
+            throw new IllegalArgumentException("Es muss ein Array mit 8 boolean Werten übergeben werden");
+        }
         int anzahlOptionen = 1;
         if (verfuegbareOptionen[0]) {
             System.out.println("[" + anzahlOptionen + "] - Info ausgeben");
