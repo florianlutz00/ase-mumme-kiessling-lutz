@@ -6,15 +6,16 @@ import de.dhbw.tinf.ase.pe.Karte;
 public class GeldautomatKeinGeld extends GeldautomatZustand {
 
     public GeldautomatKeinGeld(Geldautomat geldautomat) {
-        super(geldautomat, new boolean[]{true,
-                        true,
-                        false,
-                        false,
-                        false,
-                        false,
-                        true,
-                        true
-                });
+        super(geldautomat, new boolean[]{
+                true,
+                true,
+                true,
+                false,
+                false,
+                false,
+                true,
+                true
+        });
     }
 
     @Override

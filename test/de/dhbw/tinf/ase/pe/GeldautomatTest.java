@@ -166,18 +166,17 @@ public class GeldautomatTest {
     }
 
     @Test
-    public void testZuWenigGeldImAutomat1() {
+    public void testZuWenigGeldImAutomatAuszahlung() {
         Geldautomat geldautomat = new Geldautomat();
         geldautomat.bestuecken(100);
         geldautomat.einschieben(new Karte("1111"));
         geldautomat.eingeben("1111");
         int summe = geldautomat.auszahlen(300);
         assertEquals("Bei zu wenig Geld muss der Rest(100) zurueckgegeben werden!", 100, summe);
-        assertEquals("Bargeld muss jetzt 0 sein!", 0, geldautomat.fuellstand());
     }
 
     @Test
-    public void testZuWenigGeldImAutomat2() {
+    public void testZuWenigGeldImAutomatFuellstand() {
         Geldautomat geldautomat = new Geldautomat();
         geldautomat.bestuecken(100);
         geldautomat.einschieben(new Karte("1111"));

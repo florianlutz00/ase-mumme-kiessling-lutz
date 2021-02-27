@@ -77,9 +77,9 @@ public class Anwendung {
 
     private static void karteEinschieben(Geldautomat geldautomat) {
         String pin = erzeugePin();
-        System.out.println("Die Pin fuer deine Karte ist " + pin);
         Karte karte = new Karte(pin);
         geldautomat.einschieben(karte);
+        System.out.println("Die Pin fuer deine Karte ist " + pin);
         System.out.println("Die Karte ist jetzt im Automat");
     }
 
